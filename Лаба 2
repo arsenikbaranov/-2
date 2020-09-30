@@ -1,0 +1,43 @@
+ #include <iostream> 
+#include <stdio.h> 
+#include<locale.h> 
+int main() { 
+ setlocale(LC_ALL, "RU"); 
+ double a, b, c; 
+ int test; 
+ do { 
+  rewind(stdin); 
+  printf("Введите первое число:\n"); 
+  test=scanf_s("%lf", &a); 
+ } while (test < 1); 
+ test = 0; 
+ do { 
+  rewind(stdin); 
+  printf("Введите второе число:\n"); 
+  test=scanf_s("%lf", &b); 
+ } while (test < 1); 
+ test = 0; 
+ do { 
+  rewind(stdin); 
+  printf("Введите третье число:\n"); 
+  test=scanf_s("%lf", &c); 
+ } while (test < 1); 
+ if (a > b && b > c) 
+ { 
+  a *= 2; 
+  b *= 2; 
+  c *= 2; 
+ } 
+ else 
+ { 
+  a = abs(a); 
+  b = abs(b); 
+  c = abs(c); 
+ } 
+ printf("число а |число b |число с |\n"); 
+ printf("---------------|---------------|---------------|\n"); 
+ printf("%-15.2lf|", a); 
+ printf("%-15.2lf|", b); 
+ printf("%-15.2lf|\n", c); 
+ printf("---------------|---------------|---------------|\n"); 
+}              
