@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main()
+{
+setlocale(LC_ALL, "Russian");
+int sum = 0;
+int ms[7][7];
+printf("Заполните массив: ");
+for (int i = 0; i < 7; i++)
+{
+for (int j = 0; j < 7; j++)
+scanf_s("%d", &ms[i][j]);
+}
+printf("Исходный массив: ");
+for (int i = 0; i < 7; i++)
+{
+printf("\n");
+for (int j = 0; j < 7; j++)
+printf("%4d", ms[i][j]);
+}
+for (int i = 0; i < 7; i++)
+{
+for (int j = 0; j < 7; j++)
+{
+if ((ms[i][j] % 2 == 1) && (ms[i][j] > 0))
+{
+sum += ms[i][j];
+}
+}
+}
+printf("\n");
+printf("%d", sum);
+return 0;
+}
