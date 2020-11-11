@@ -1,0 +1,73 @@
+#include <stdio.h> 
+#include <locale.h> 
+#include <stdlib.h> 
+ 
+int main(void) 
+{ 
+ setlocale(LC_ALL, "Russian"); 
+ int *a = nullptr; 
+ int n, s; 
+ 
+ do { 
+  system("cls"); 
+  printf("Введите размер матрицыn n: "); 
+  scanf_s("%d", &s); 
+  if (s < 1) { 
+   fflush(stdin); 
+   continue; 
+  } 
+  n = s * s; 
+  if (!(a = (int*)malloc(sizeof(int) * n))) { 
+   printf("\nНедостаточно свободной памяти\nУменьшите размер матрицы"); 
+   free(a); 
+  } 
+ } while (!a); 
+ 
+ printf("\nВвод массива:\n"); 
+ int l = 0; 
+ for (int i = 0; i < s; i++) { 
+  for (int j = 0; j < s; j++) { 
+   printf("a[%d][%d]: ", i, j); 
+   scanf_s("%d", a + l); 
+   l++; 
+  } 
+   
+   
+ } 
+ l = 0; 
+ for (int i = 0; i < s; i++) { 
+  for (int j = 0; j < s; j++) { 
+   printf("%3d", *(a + l)); 
+   l++; 
+  } 
+  printf("\n"); 
+ } 
+ printf("\n"); 
+ bool f = false; 
+ int index = 0; 
+ for (int i = 0; i < n; i++) { 
+  if (f && *(a + i) < 0) 
+   index = i; 
+  else if (*(a + i) < 0) 
+   f = true;   
+ } 
+ int tmp; 
+ for (int i = 0; i < n - 1; i++) { 
+  for (int j = index; j < n - i - 1; j++) { 
+   if (*(a + j) > *(a + j + 1)) { 
+    tmp = *(a + j); 
+    *(a + j) = *(a + j + 1); 
+    *(a + j + 1) = tmp; 
+   } 
+  } 
+ } 
+ l = 0; 
+ for (int i = 0; i < s; i++) { 
+  for (int j = 0; j < s; j++) { 
+   printf("%3d", *(a + l)); 
+   l++; 
+  } 
+  printf("\n"); 
+ } 
+ free(a); 
+}
