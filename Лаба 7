@@ -1,0 +1,37 @@
+#include "stdafx.h" 
+ 
+#include<locale.h> 
+#include<stdio.h> 
+#include<stdlib.h> 
+ 
+ 
+int main() 
+{ 
+ setlocale(LC_ALL, "Rus"); 
+ char *s; 
+ int n, index1, index2 = -1;
+ bool f = false;  
+ 
+ printf("Введите длинну строки: "); 
+ scanf("%d", &n); 
+ s = (char*)malloc(n * sizeof(char)); 
+ 
+ rewind(stdin); 
+ printf("Введите строку: "); 
+ gets_s(s, n + 1); 
+ for (int i = 0; i < n; i++) { 
+  if (s[i] == ':') { 
+   if (!f) { 
+    index1 = i; 
+    f = true; 
+   } 
+   else index2 = i;
+  } 
+ } 
+ for (int i = index1+1; i < (index2 > -1 ? index2 : n); i++) { //(index2 > -1 ? index2 : n) - это проверка если index2 > -1 то мы испольщуем index2 в качестве переменной для ограничения цикла, иначе испольщуем n 
+  printf("%c", s[i]); 
+ } 
+ printf("\n"); 
+ system("pause"); 
+ return 0; 
+}
