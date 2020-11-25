@@ -1,12 +1,13 @@
+
 #include <math.h> 
 #include <stdio.h> 
 #include <stdlib.h> 
  
 int main() { 
- int n = 1; 
- int m = -1; 
- for (int n = 1; m < 0; n++) { 
- m = 7 * pow(n, 3) + 81 * pow(n, 2) - pow(10, 6); 
- } 
- printf("n=%d", &n); 
+int n = 1; 
+int m = -1; 
+for (int n = 1; m < 0; n++) { 
+m = 7 * pow(n, 3) + 81 * pow(n, 2) - pow(10, 6); 
+} 
+printf("n=%d", &n); 
 }
