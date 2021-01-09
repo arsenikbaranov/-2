@@ -1,42 +1,62 @@
 #include<locale.h> 
 #include<stdio.h> 
 #include<stdlib.h> 
+#include<Windows.h> 
+bool cheak(char* s, int n) { 
+ for (int i = 1; i < n; i++) 
+ if (s[i] == 'а' || s[i] == 'у' || s[i] == 'о' || s[i] == 'ы' || s[i] == 'и' || s[i] == 'э' || s[i] == 'я' || s[i] == 'ю' || s[i] == 'е' || s[i] == 'ё') 
+ if (s[i] == s[i - 1]) return true; 
  
+ return false; 
+} 
  
 int main() 
 { 
  setlocale(LC_ALL, "Rus"); 
- char* s; //наша строка 
- int n, index1, index2 = -1; //n - длинна строки, index1 - индекс первого двоиточия, index2 - индекс второго двоиточия(-1 для проверки было ли встречено второе двоиточие) 
- bool f = false; //флаг для проверки было ли хоть одно двоиточие 
+ SetConsoleOutputCP(1251); 
+ SetConsoleCP(1251); 
  
- printf("Введите длинну строки: "); 
- scanf_s("%d", &n); 
- s = (char*)malloc(n * sizeof(char)); //выделение памяти под строку 
+ char s[1000], w[1000],str[1000][1000]; 
+ int n, len = 0, l = 0; 
+ printf("Введите текст: \n"); 
+ int q = 0, in = 0,i,j; 
+ while (s[0] != '.') { 
  
- rewind(stdin); //отчистка буффера ввода 
- printf("Введите строку: "); 
- gets_s(s, n + 1); 
- for (int i = 0; i < n; i++) { 
-  if (s[i] == ':') { //проверка является ли элемент двоиточием 
-   if (!f) { //если не было встречено первого двоиточия 
-    index1 = i; // запоминаем индекс первого двоиточия 
-    f = true; //ставим флаг что первое двоиточие было встреченно 
-   } 
-   else { 
-    index2 = i; //запоминаем инлекс воторого двоиточия 
-    break; 
-   } 
-  } 
+ gets_s(s, 1000); 
+ for (int i = 0; i < strlen(s); i++) { 
+ if (s[i] != ' ' && s[i] != '.') { 
+ w[l] = s[i]; 
+ l++; 
  } 
- if (f==true) 
- { 
-  for (int i = index1 + 1; i < (index2 > -1 ? index2 : n); i++) { //(index2 > -1 ? index2 : n) - это проверка если index2 > -1 то мы испольщуем index2 в качестве переменной для ограничения цикла, иначе испольщуем n 
-   printf("%c", s[i]); //выводим посимвольно строку 
-  } 
+ if (i == strlen(s) - 1 || s[i] == ' ' || s[i] == '.') { 
+ w[l] = s[strlen(s)];  
+ if (cheak(w, l)) {
+ for (int j = (i != (strlen(s) - 1) ? (i - l) : (i - l + 1)); j <= i; j++) { 
+ str[q][in] = s[j] - 32; 
+ in++; 
  } 
- else printf("Двоеточий не было"); 
+ } 
+ else { 
+ for (int j = (i != (strlen(s) - 1) ? (i - l) : (i - l + 1)); j <= i; j++) { 
+ str[q][in] = s[j]; 
+ in++; 
+ } 
+ } 
+ str[q][in] = s[i]; in++; 
+ l = 0; 
+ } 
+ 
+ }str[q][in] = '\0'; q++; in = 0; 
+ } 
  printf("\n"); 
+ for (i = 0; i < q; i++) { 
+ for (j = 0; str[i][j] != '\0'; j++) {
+ printf("%c", str[i][j]); 
+ } 
+ printf("\n"); 
+ } 
+ 
+ 
  system("pause"); 
  return 0; 
 }
