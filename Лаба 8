@@ -3,60 +3,59 @@
 #include<stdlib.h> 
 #include<Windows.h> 
 bool cheak(char* s, int n) { 
- for (int i = 1; i < n; i++) 
- if (s[i] == 'а' || s[i] == 'у' || s[i] == 'о' || s[i] == 'ы' || s[i] == 'и' || s[i] == 'э' || s[i] == 'я' || s[i] == 'ю' || s[i] == 'е' || s[i] == 'ё') 
- if (s[i] == s[i - 1]) return true; 
- 
- return false; 
+for (int i = 1; i < n; i++) 
+if (s[i] == 'а' || s[i] == 'у' || s[i] == 'о' || s[i] == 'ы' || s[i] == 'и' || s[i] == 'э' || s[i] == 'я' || s[i] == 'ю' || s[i] == 'е' || s[i] == 'ё') //является ли символ глассной 
+if (s[i] == s[i - 1]) return true; 
+return false; 
 } 
  
 int main() 
 { 
- setlocale(LC_ALL, "Rus"); 
- SetConsoleOutputCP(1251); 
- SetConsoleCP(1251); 
+setlocale(LC_ALL, "Rus"); 
+SetConsoleOutputCP(1251); 
+SetConsoleCP(1251); 
  
- char s[1000], w[1000],str[1000][1000]; 
- int n, len = 0, l = 0; 
- printf("Введите текст: \n"); 
- int q = 0, in = 0,i,j; 
- while (s[0] != '.') { 
+char s[1000], w[1000], str[1000][1000]; 
+int n, len = 0, l = 0; 
+printf("Введите текст: \n"); 
+int q = 0, in = 0, i, j; 
+while (s[0] != '.') {
  
- gets_s(s, 1000); 
- for (int i = 0; i < strlen(s); i++) { 
- if (s[i] != ' ' && s[i] != '.') { 
- w[l] = s[i]; 
- l++; 
- } 
- if (i == strlen(s) - 1 || s[i] == ' ' || s[i] == '.') { 
- w[l] = s[strlen(s)];  
- if (cheak(w, l)) {
- for (int j = (i != (strlen(s) - 1) ? (i - l) : (i - l + 1)); j <= i; j++) { 
- str[q][in] = s[j] - 32; 
- in++; 
- } 
- } 
- else { 
- for (int j = (i != (strlen(s) - 1) ? (i - l) : (i - l + 1)); j <= i; j++) { 
- str[q][in] = s[j]; 
- in++; 
- } 
- } 
- str[q][in] = s[i]; in++; 
- l = 0; 
- } 
+gets_s(s, 1000); 
+for (int i = 0; i < strlen(s); i++) { 
+if (s[i] != ' ' && s[i] != '.') { 
+w[l] = s[i]; 
+l++; 
+} 
+if (i == strlen(s) - 1 || s[i] == ' ' || s[i] == '.') { 
+w[l] = s[strlen(s)]; 
+if (cheak(w, l)) { 
+for (int j = (i != (strlen(s) - 1) ? (i - l) : (i - l + 1)); j <= i; j++) { 
+str[q][in] = s[j] - 32; 
+in++; 
+} 
+} 
+else { 
+for (int j = (i != (strlen(s) - 1) ? (i - l) : (i - l + 1)); j <= i; j++) { 
+str[q][in] = s[j]; 
+in++; 
+} 
+} 
+str[q][in] =' '; in++; 
+l = 0; 
+} 
  
- }str[q][in] = '\0'; q++; in = 0; 
- } 
- printf("\n"); 
- for (i = 0; i < q; i++) { 
- for (j = 0; str[i][j] != '\0'; j++) {
- printf("%c", str[i][j]); 
- } 
- printf("\n"); 
- } 
+}str[q][in] = '\0'; q++; in = 0; 
+} 
+printf("\n"); 
+for (i = 0; i < q; i++) { 
+for (j = 0; str[i][j] != '\0'; j++) { 
+printf("%c", str[i][j]); 
+} 
+printf("\n"); 
+} 
  
  
- system("pause"); 
- return 0; 
+system("pause"); 
+return 0; 
 }
