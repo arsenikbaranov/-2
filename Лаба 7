@@ -1,40 +1,43 @@
-#include "stdafx.h" 
- 
+
 #include<locale.h> 
 #include<stdio.h> 
 #include<stdlib.h> 
  
- 
 int main() 
+{char temp;
+setlocale(LC_ALL, "Rus"); 
+char* s; 
+int n, index1, index2 = -1;
+bool f = false;
+ 
+printf("Введите длинну строки: "); 
+scanf_s("%d", &n); 
+scanf_s("%c",&temp);
+s = (char*)malloc(n * sizeof(char)); 
+ 
+rewind(stdin); 
+printf("Введите строку: "); 
+gets_s(s, n + 1); 
+for (int i = 0; i < n; i++) { 
+if (s[i] == ':') { 
+if (!f) { 
+index1 = i; 
+f = true; 
+} 
+else { 
+index2 = i;
+break; 
+} 
+} 
+} 
+if (f==true) 
 { 
- setlocale(LC_ALL, "Rus"); 
- char *s; //наша строка 
- int n, index1, index2 = -1; //n - длинна строки, index1 - индекс первого двоиточия, index2 - индекс второго двоиточия(-1 для проверки было ли встречено второе двоиточие) 
- bool f = false; //флаг для проверки было ли хоть одно двоиточие 
- 
- printf("Введите длинну строки: "); 
- scanf("%d", &n); 
- s = (char*)malloc(n * sizeof(char)); //выделение памяти под строку 
- 
- rewind(stdin); //отчистка буффера ввода 
- printf("Введите строку: "); 
- gets_s(s, n + 1); 
- for (int i = 0; i < n; i++) { 
-  if (s[i] == ':') { //проверка является ли элемент двоиточием 
-   if (!f) { //если не было встречено первого двоиточия 
-    index1 = i; // запоминаем индекс первого двоиточия 
-    f = true; //ставим флаг что первое двоиточие было встреченно 
-   } 
-   else { 
-    index2 = i; //запоминаем инлекс воторого двоиточия 
-    break; 
-   } 
-  } 
- } 
- for (int i = index1 + 1; i < (index2 > -1 ? index2 : n); i++) { //(index2 > -1 ? index2 : n) - это проверка если index2 > -1 то мы испольщуем index2 в качестве переменной для ограничения цикла, иначе испольщуем n 
-  printf("%c", s[i]); //выводим посимвольно строку 
- } 
- printf("\n"); 
- system("pause"); 
- return 0; 
+for (int i = index1 + 1; i < (index2 > -1 ? index2 : n); i++) {
+printf("%c", s[i]); 
+} 
+} 
+else printf("Двоеточий не было"); 
+printf("\n"); 
+system("pause"); 
+return 0; 
 }
