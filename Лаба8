@@ -1,52 +1,43 @@
-#include "stdafx.h" 
- 
-#include<locale.h> 
-#include<stdio.h> 
-#include<stdlib.h> 
-#include<Windows.h> 
-bool cheak(char *s, int n) { //функция проверки гласных 
- for (int i = 1; i < n; i++) 
-  if (s[i] == 'а' || s[i] == 'у' || s[i] == 'о' || s[i] == 'ы' || s[i] == 'и' || s[i] == 'э' || s[i] == 'я' || s[i] == 'ю' || s[i] == 'е' || s[i] == 'ё') //является ли символ глассной 
-   if (s[i] == s[i - 1]) return true; // если придыдущий символ глассная и совподает с текущим возращаем ПРАВДА 
- 
- return false; 
-} 
- 
-int main() 
+#include<locale.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<windows.h> 
+#include<locale.h>
+#include<string.h>
+int main() {
+setlocale(0, "Rus");
+SetConsoleOutputCP(1251); 
+SetConsoleCP(1251);
+char text[1000], newtext[1000][1000]; 
+int str = 0, i = 0, j=0, kof; 
+while (1) { 
+gets_s(text,1000); 
+if (text[0] == '.') 
 { 
- setlocale(LC_ALL, "Rus"); 
- SetConsoleOutputCP(1251); 
- SetConsoleCP(1251); 
- 
- char *s, *w; 
- int n, len = 0, l = 0; 
- 
- printf("Введите длинну строки: "); 
- scanf("%d", &n); 
- s = (char*)malloc(n * sizeof(char));
- w = (char*)malloc(2 * n * sizeof(char)); 
- 
- rewind(stdin);
- printf("Введите строку: "); 
- gets_s(s, n + 1); 
- for (int i = 0; i < n; i++) { 
-  if (s[i] != ' ') {
-   w[l] = s[i]; 
-   l++; 
-  } 
-  if (i == n - 1 || s[i] == ' ') { 
-   w[l] = s[n - 1]; 
-   if (cheak(w, l)) { 
-    for (int j = (i != (n-1) ? (i - l) : (i - l + 1)); j < i; j++) { //(i != (n-1) ? (i - l) : (i - l + 1)) 
-     s[j] = s[j] - 32; 
-    } 
-   }    
-   l = 0; 
-  } 
-   
- } 
- puts(s); 
-  
- system("pause"); 
- return 0; 
+break; 
+} 
+for (i = 0; i < strlen(text); i++) { 
+newtext[str][i] = text[i]; 
+if ((text[i] == 'а' || text[i] == 'у' || text[i] == 'о' || text[i] == 'ы' || text[i] == 'и' || text[i] == 'э' || text[i] == 'я' || text[i] == 'ю' || text[i] == 'е' || text[i] == 'ё') && text[i] == text[i + 1]) 
+{ for (j = i; text[j] != ' ' && text[j] != '.' && j >= 0; j--) {
+newtext[str][j] = text[j] - 32; 
+}
+for (i = i; text[i] != ' ' && text[i] != '.'&& i<strlen(text); i++) {
+newtext[str][i] = text[i] - 32; 
+}
+i--; 
+}
+}
+newtext[str][i + 1] = '\0'; 
+str++;
+}
+for (i = 0; i < str; i++) {
+for (j = 0; newtext[i][j+2] != '\0'; j++) {
+printf("%c", newtext[i][j]);
+} 
+printf(".");
+printf("\n"); 
+}
+system("pause");
+return 0;
 }
